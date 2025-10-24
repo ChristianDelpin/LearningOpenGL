@@ -5,6 +5,9 @@
 *.vcxproj.user
 *.vcxproj.filters
 
+# VS Code
+.vscode/
+
 # Build folders
 build/
 out/
