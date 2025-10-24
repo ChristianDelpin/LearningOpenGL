@@ -1,0 +1,59 @@
+cmake_minimum_required(VERSION 3.14)
+project(LearningOpenGL VERSION 0.1 LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# Directories for external deps
+set(GLAD_DIR ${CMAKE_SOURCE_DIR}/external/glad)
+set(GLFW_DIR ${CMAKE_SOURCE_DIR}/external/glfw)
+set(IMGUI_DIR ${CMAKE_SOURCE_DIR}/external/imgui)
+
+# ---------- Sources ----------
+set(SOURCES
+    src/main.cpp
+    ${GLAD_DIR}/src/glad.c
+
+    # ImGui core
+    ${IMGUI_DIR}/imgui.cpp
+    ${IMGUI_DIR}/imgui_draw.cpp
+    ${IMGUI_DIR}/imgui_widgets.cpp
+    ${IMGUI_DIR}/imgui_tables.cpp
+    ${IMGUI_DIR}/imgui_demo.cpp   # required if you call ShowDemoWindow
+
+    # ImGui backends
+    ${IMGUI_DIR}/backends/imgui_impl_glfw.cpp
+    ${IMGUI_DIR}/backends/imgui_impl_opengl3.cpp
+)
+
+# ---------- Create executable target (must come before target_* calls) ----------
+add_executable(LearningOpenGL ${SOURCES})
+
+# ---------- Target-specific include directories & defines ----------
+target_include_directories(LearningOpenGL PRIVATE
+    ${GLAD_DIR}/include
+    ${IMGUI_DIR}
+    ${IMGUI_DIR}/backends
+)
+
+# Tell ImGui's OpenGL backend to use GLAD
+target_compile_definitions(LearningOpenGL PRIVATE IMGUI_IMPL_OPENGL_LOADER_GLAD)
+
+# ---------- Build GLFW (expects external/glfw to be present) ----------
+# Add GLFW directory so the 'glfw' target exists for linking.
+add_subdirectory(${GLFW_DIR})
+
+# ---------- Link libraries ----------
+find_package(OpenGL REQUIRED)
+if(OPENGL_FOUND)
+    target_link_libraries(LearningOpenGL PRIVATE glfw ${OPENGL_gl_LIBRARY})
+else()
+    message(FATAL_ERROR "OpenGL not found on this system.")
+endif()
+
+# ---------- Compiler warnings ----------
+if(MSVC)
+    target_compile_options(LearningOpenGL PRIVATE /W4 /permissive-)
+else()
+    target_compile_options(LearningOpenGL PRIVATE -Wall -Wextra -Wpedantic)
+endif()

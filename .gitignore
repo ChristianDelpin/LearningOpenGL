@@ -1,0 +1,27 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.vcxproj.user
+*.vcxproj.filters
+
+# Build folders
+build/
+out/
+Debug/
+Release/
+
+# Generated files
+*.pdb
+*.idb
+*.obj
+*.exe
+
+# CMake generated files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+
+# Others
+*.zip
+*.log
