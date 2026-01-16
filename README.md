@@ -22,7 +22,7 @@
 	- For myself: 
 		1. We define our triangle vertices in NDC. 
 		2. Then, we send this to the Vertex Shader using a Vertex Buffer Object (VBO) and a Vertex Array Object (VAO).
-		3. The VBO is given a large batch of our vertex data, vs sending it one vertex at a time for efficiency (CPU -> GPU is slow, and then GPU also has instant access to this data for drawing purposes).
+		3. The VBO is given a large batch of our vertex data, vs sending it one vertex at a time for efficiency (CPU → GPU is slow, and then GPU also has instant access to this data for drawing purposes).
 - Did not start on Fragment Shaders yet.
 
 ## Stuff for myself
@@ -36,3 +36,4 @@
   ```sh
   cmake --build build --config Debug
   ```
+
