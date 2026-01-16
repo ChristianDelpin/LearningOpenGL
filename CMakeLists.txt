@@ -29,6 +29,16 @@ set(SOURCES
 # ---------- Create executable ----------
 add_executable(${PROJECT_NAME} ${SOURCES})
 
+# ---------- Remove console window ----------
+if(WIN32)
+    set_target_properties(${PROJECT_NAME} PROPERTIES WIN32_EXECUTABLE TRUE)
+    if(MSVC)
+        set_target_properties(${PROJECT_NAME} PROPERTIES
+            LINK_FLAGS "/ENTRY:mainCRTStartup"
+        )
+    endif()
+endif()
+
 # ---------- Include directories & defines ----------
 target_include_directories(${PROJECT_NAME} PRIVATE
     ${GLAD_DIR}/include
