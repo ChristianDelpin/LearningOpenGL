@@ -14,7 +14,7 @@
 ## Stuff for myself
 
 ### Building the Project
-- In the root directory, run the following command in the Developer PowerShell for VS 2022:
+- In the root directory, run the following command in the **__Developer PowerShell for VS 2022__**:
   ```sh
   cmake --build build --config Release
   ```
