@@ -126,7 +126,7 @@ int main()
 
 		// R, G, B, Alpha
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT); // Clear the color buffer.
+		glClear(GL_COLOR_BUFFER_BIT);	// Clear the color buffer.
 
 		/*
 		* Buffers that we can clear:
@@ -149,6 +149,12 @@ int main()
 	glfwTerminate();
 	return 0;
 }
+
+
+
+
+
+ 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
 	glViewport(0, 0, width, height);

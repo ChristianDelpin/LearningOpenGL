@@ -25,6 +25,14 @@
 		3. The VBO is given a large batch of our vertex data, vs sending it one vertex at a time for efficiency (CPU → GPU is slow, and then GPU also has instant access to this data for drawing purposes).
 - Did not start on Fragment Shaders yet.
 
+### 2026-07-24
+A bit of a hiatus to finish up my degree, and a bit of a programming break.
+
+- Reviewed my notes to remind myself of how things work, and what I've done so far.
+- Learned what an **alpha** value is
+	- Transparency level of an object
+
+
 ## Stuff for myself
 
 ### Building the Project
@@ -37,3 +45,34 @@
   cmake --build build --config Debug
   ```
 
+### Terms and Concepts
+
+#### Graphics Pipeline
+1. Vertex Shader
+	- Takes a collection of vertices, and maps them to NDC
+2. Geometry Shader (optional)
+	- Connects the vertices together to form primitive shapes (triangles, lines, etc.)
+		- Not sure, but from the simple image example, it looks like it does so via nearest neighbors.
+3. Primitive Shape Assembly
+	- Takes the primitives, and bounds the shape (sets the perimiter of the shape)
+4. Rasterization
+	- Maps the bounds to the device's pixel
+	- Fills in the mapped pixels 
+	- Performs **clipping**: discards any pixels that are out of view (occluded objects, or outside the POV)
+5. Fragment Shader
+	- Calculates the final color of a pixel
+	- Contains data about the scene such as lighting, textures, shadows, etc.
+6. Alpha Tests & Blending
+	- Checks the **depth** and **stencil** values
+	- Performs further clipping
+X. Secret Stages: Tesselation and Transformation Feedback Loop
+	- idk about them, but they're mentioned in the tutorial. Writing them down so I can refer to them later if discussed.
+
+The primary stages that are worked with are (1) and (5) to create the object shapes, and the cool effects on them. They are also **required** to be defined/implemented. ***There are no default vertex/fragment shaders on the GPU**
+
+#### Definitions
+- **NDC**: Normalized Device Coordinates
+- **VBO**: Vertex Buffer Object
+	- On-GPU memory that stores the vertex data. Advantage: allows us to send large batches of vertex data to the GPU
+- **VAO**: Vertex Array Object
+- **Alpha**: Transparency level of an object
